@@ -1,7 +1,5 @@
 app:
-  description: '可以自动化生成全套教程。
-
-    开始时输入想要生成的教程名称。'
+  description: '可以自动化生成全套教程。开始时输入想要生成的教程名称。'
   icon: 🤖
   icon_background: '#FFEAD5'
   mode: workflow
