@@ -1,1 +1,841 @@
 
+  app:
+  description: 使用DeepSeek-R1+博查搜索插件，1分钟搭建一个AI搜索助手，然后自动在多个DeepSeek供应商中切换，从而永不掉线
+  icon: ▶️
+  icon_background: '#D5D9EB'
+  mode: advanced-chat
+  name: DeepSeek-R1 + 博查实现联网搜索
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: seekerliu/bocha:0.0.1@2929331141313ed18ab98af1ef07377d58c8dace1a624d2a1a30d5a2a5ef98ee
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/siliconflow:0.0.5@18738d2a11ef85f1b5e0993777c7ac911d21ff9ddaa156603fe27e57eb5c5716
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 5
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: answer
+      id: 1739073604460-true-1739073629032-target
+      source: '1739073604460'
+      sourceHandle: 'true'
+      target: '1739073629032'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: llm
+      id: 1739073604460-false-1739073912957-target
+      source: '1739073604460'
+      sourceHandle: 'false'
+      target: '1739073912957'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: answer
+      id: 17390739238790-true-1739073697782-target
+      source: '17390739238790'
+      sourceHandle: 'true'
+      target: '1739073697782'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: answer
+      id: 1739073939281-source-1739073951668-target
+      source: '1739073939281'
+      sourceHandle: source
+      target: '1739073951668'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: answer
+      id: llm-source-1739074179723-target
+      source: llm
+      sourceHandle: source
+      target: '1739074179723'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: if-else
+      id: 1739074179723-source-1739073604460-target
+      source: '1739074179723'
+      sourceHandle: source
+      target: '1739073604460'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: answer
+      id: 1739073912957-source-1739074189186-target
+      source: '1739073912957'
+      sourceHandle: source
+      target: '1739074189186'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: if-else
+      id: 1739074189186-source-17390739238790-target
+      source: '1739074189186'
+      sourceHandle: source
+      target: '17390739238790'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: llm
+      id: 17390739238790-false-1739073939281-target
+      source: '17390739238790'
+      sourceHandle: 'false'
+      target: '1739073939281'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: tool
+      id: 1738896965839-source-1739074828523-target
+      source: '1738896965839'
+      sourceHandle: source
+      target: '1739074828523'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: code
+      id: 1739074828523-source-1739074903618-target
+      source: '1739074828523'
+      sourceHandle: source
+      target: '1739074903618'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: llm
+      id: 1739074903618-source-llm-target
+      source: '1739074903618'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Start
+        type: start
+        variables: []
+      height: 53
+      id: '1738896965839'
+      position:
+        x: 30
+        y: 263
+      positionAbsolute:
+        x: 30
+        y: 263
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-ai/DeepSeek-R1-Distill-Qwen-32B
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: 9ada77a4-dc3c-423b-9c50-20575b95afc9
+          role: system
+          text: '# 角色
+
+            你是一个由博查精心打造的 AI 搜索助手，能够在网络世界中精准搜索，并以中立客观、新闻式的专业语气为用户答疑解惑。
+
+
+            ## 技能
+
+            ### 技能 1: 精准回应用户问题
+
+            1. 当用户提出问题时，首先以一个单独的段落简短直接地回答核心问题，随后通过若干独立的段落详细分析问题的各个方面和细节，确保答案完整且逻辑清晰。
+
+            2. 提供的答案应具备中等到较长的篇幅，信息量满满且紧密关联，但切勿重复用户问题。
+
+            3. 结构化地拆解内容，明确表达内部的分类及逻辑关系，并以 markdown 格式提供详尽内容。
+
+
+            ### 技能 2：在答案中适当地使用引用编号来引证上下文信息
+
+            1. 您将获得一组与该问题相关的上下文，每个上下文都以参考编号开头，例如 [[引用:x]]，其中 x 是一个数字。请使用上下文进行参考作答。
+
+
+            ### 技能 3：不要盲目的重复上下文，提供扩展的见解和解释
+
+            1. 对上下文信息进行分析、综合和评价，提供更深入的见解和解释。
+
+            2. 融入你的专业知识和经验，以提供更加丰富和有深度的答案。
+
+            3. 始终保持对用户问题的敏感度和对信息准确性的追求。
+
+
+            ## 限制
+
+            1. 禁止告知用户通过打开链接或访问网站获取答案，除非用户明确要求提供链接。
+
+            2. 必须基于上下文信息来回答问题并引用相关内容，然而无需在回应中提及上下文。
+
+            3. 只有在必要的时候，才使用无序列表、有序列表等格式。
+
+            4. 只有在必要的时候，才通过独立段落详细分析问题、总结关键点和主要信息。
+
+            '
+        - id: 10dab9ad-7505-4372-bcd3-19178dd1d323
+          role: user
+          text: '以下是上下文：
+
+            {{#1739074903618.context#}}
+
+            以下是用户问题：
+
+            {{#sys.query#}}'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: LLM 1
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 115
+      id: llm
+      position:
+        x: 942
+        y: 263
+      positionAbsolute:
+        x: 942
+        y: 263
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        author: stvlynn
+        desc: ''
+        height: 185
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"font-size:
+          14px;","text":"说明","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"在这个
+          Demo 中，你将使用 Dify 的 Error Handling 功能，在多个 DeepSeek 供应商之间自动切换，以确保你的服务始终在线","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 297
+      height: 185
+      id: '1738999576707'
+      position:
+        x: 22.663492637885952
+        y: 126.88229916298513
+      positionAbsolute:
+        x: 22.663492637885952
+        y: 126.88229916298513
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 297
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: 50f702fa-bf7c-46b8-9a0b-55dd420cdc85
+            value: ''
+            varType: string
+            variable_selector:
+            - llm
+            - text
+          id: 'true'
+          logical_operator: or
+        desc: ''
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 125
+      id: '1739073604460'
+      position:
+        x: 1550
+        y: 263
+      positionAbsolute:
+        x: 1550
+        y: 263
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        answer: '  '
+        desc: ''
+        selected: false
+        title: 直接回复 2
+        type: answer
+        variables: []
+      height: 83
+      id: '1739073629032'
+      position:
+        x: 1854
+        y: 263
+      positionAbsolute:
+        x: 1854
+        y: 263
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        answer: '  '
+        desc: ''
+        selected: false
+        title: 直接回复 3
+        type: answer
+        variables: []
+      height: 83
+      id: '1739073697782'
+      position:
+        x: 2766
+        y: 390
+      positionAbsolute:
+        x: 2766
+        y: 390
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-ai/DeepSeek-R1-Distill-Qwen-14B
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: 45ecdc73-e323-4a16-a12e-0b040bb2ed0d
+          role: system
+          text: '# 角色
+
+            你是一个由博查精心打造的 AI 搜索助手，能够在网络世界中精准搜索，并以中立客观、新闻式的专业语气为用户答疑解惑。
+
+
+            ## 技能
+
+            ### 技能 1: 精准回应用户问题
+
+            1. 当用户提出问题时，首先以一个单独的段落简短直接地回答核心问题，随后通过若干独立的段落详细分析问题的各个方面和细节，确保答案完整且逻辑清晰。
+
+            2. 提供的答案应具备中等到较长的篇幅，信息量满满且紧密关联，但切勿重复用户问题。
+
+            3. 结构化地拆解内容，明确表达内部的分类及逻辑关系，并以 markdown 格式提供详尽内容。
+
+
+            ### 技能 2：在答案中适当地使用引用编号来引证上下文信息
+
+            1. 您将获得一组与该问题相关的上下文，每个上下文都以参考编号开头，例如 [[引用:x]]，其中 x 是一个数字。请使用上下文进行参考作答。
+
+
+            ### 技能 3：不要盲目的重复上下文，提供扩展的见解和解释
+
+            1. 对上下文信息进行分析、综合和评价，提供更深入的见解和解释。
+
+            2. 融入你的专业知识和经验，以提供更加丰富和有深度的答案。
+
+            3. 始终保持对用户问题的敏感度和对信息准确性的追求。
+
+
+            ## 限制
+
+            1. 禁止告知用户通过打开链接或访问网站获取答案，除非用户明确要求提供链接。
+
+            2. 必须基于上下文信息来回答问题并引用相关内容，然而无需在回应中提及上下文。
+
+            3. 只有在必要的时候，才使用无序列表、有序列表等格式。
+
+            4. 只有在必要的时候，才通过独立段落详细分析问题、总结关键点和主要信息。
+
+            '
+        - id: f32f373e-cab0-4b16-995e-a6fb230623e3
+          role: user
+          text: '以下是上下文：
+
+            {{#1739074903618.context#}}
+
+            以下是用户问题：
+
+            {{#sys.query#}}'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: LLM 2
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 115
+      id: '1739073912957'
+      position:
+        x: 1854
+        y: 387
+      positionAbsolute:
+        x: 1854
+        y: 387
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: 50f702fa-bf7c-46b8-9a0b-55dd420cdc85
+            value: ''
+            varType: string
+            variable_selector:
+            - '1739073912957'
+            - text
+          id: 'true'
+          logical_operator: or
+        desc: ''
+        selected: false
+        title: 条件分支 (1)
+        type: if-else
+      height: 125
+      id: '17390739238790'
+      position:
+        x: 2462
+        y: 390
+      positionAbsolute:
+        x: 2462
+        y: 390
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: 4dc327c2-0c58-4fe7-a117-872e00d7ae20
+          role: system
+          text: '# 角色
+
+            你是一个由博查精心打造的 AI 搜索助手，能够在网络世界中精准搜索，并以中立客观、新闻式的专业语气为用户答疑解惑。
+
+
+            ## 技能
+
+            ### 技能 1: 精准回应用户问题
+
+            1. 当用户提出问题时，首先以一个单独的段落简短直接地回答核心问题，随后通过若干独立的段落详细分析问题的各个方面和细节，确保答案完整且逻辑清晰。
+
+            2. 提供的答案应具备中等到较长的篇幅，信息量满满且紧密关联，但切勿重复用户问题。
+
+            3. 结构化地拆解内容，明确表达内部的分类及逻辑关系，并以 markdown 格式提供详尽内容。
+
+
+            ### 技能 2：在答案中适当地使用引用编号来引证上下文信息
+
+            1. 您将获得一组与该问题相关的上下文，每个上下文都以参考编号开头，例如 [[引用:x]]，其中 x 是一个数字。请使用上下文进行参考作答。
+
+
+            ### 技能 3：不要盲目的重复上下文，提供扩展的见解和解释
+
+            1. 对上下文信息进行分析、综合和评价，提供更深入的见解和解释。
+
+            2. 融入你的专业知识和经验，以提供更加丰富和有深度的答案。
+
+            3. 始终保持对用户问题的敏感度和对信息准确性的追求。
+
+
+            ## 限制
+
+            1. 禁止告知用户通过打开链接或访问网站获取答案，除非用户明确要求提供链接。
+
+            2. 必须基于上下文信息来回答问题并引用相关内容，然而无需在回应中提及上下文。
+
+            3. 只有在必要的时候，才使用无序列表、有序列表等格式。
+
+            4. 只有在必要的时候，才通过独立段落详细分析问题、总结关键点和主要信息。
+
+            '
+        - id: c58d40a7-0b11-40da-92af-115774222587
+          role: user
+          text: '以下是上下文：
+
+            {{#1739074903618.context#}}
+
+            以下是用户问题：
+
+            {{#sys.query#}}'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: LLM 3
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 115
+      id: '1739073939281'
+      position:
+        x: 2766
+        y: 514
+      positionAbsolute:
+        x: 2766
+        y: 514
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        answer: '{{#1739073939281.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复 3
+        type: answer
+        variables: []
+      height: 102
+      id: '1739073951668'
+      position:
+        x: 3070
+        y: 517
+      positionAbsolute:
+        x: 3070
+        y: 517
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        answer: '{{#llm.text#}}'
+        desc: ''
+        selected: true
+        title: 直接回复 4
+        type: answer
+        variables: []
+      height: 102
+      id: '1739074179723'
+      position:
+        x: 1246
+        y: 263
+      positionAbsolute:
+        x: 1246
+        y: 263
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        answer: '{{#1739073912957.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复 5
+        type: answer
+        variables: []
+      height: 102
+      id: '1739074189186'
+      position:
+        x: 2158
+        y: 390
+      positionAbsolute:
+        x: 2158
+        y: 390
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        default_value:
+        - key: text
+          type: string
+          value: ''
+        - key: json
+          type: array[object]
+          value: '[]'
+        desc: ''
+        error_strategy: default-value
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The keywords or phrases to search
+            ja_JP: 検索キーワードまたはフレーズ
+            pt_BR: As palavras-chave ou frases para pesquisar
+            zh_Hans: 搜索关键词或语句
+          label:
+            en_US: query
+            ja_JP: query
+            pt_BR: query
+            zh_Hans: query
+          llm_description: 搜索关键词或语句
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: noLimit
+          form: llm
+          human_description:
+            en_US: The time range for the search results. Available options noLimit,
+              oneYear, oneMonth, oneWeek, oneDay. Default is noLimit
+            ja_JP: 検索結果の時間範囲。利用可能なオプションは noLimit, oneYear, oneMonth, oneWeek, oneDay
+              です。デフォルトは noLimit です
+            pt_BR: O intervalo de tempo para os resultados da pesquisa. Opções disponíveis
+              noLimit, oneYear, oneMonth, oneWeek, oneDay. O padrão é noLimit
+            zh_Hans: 搜索的时间范围，可选值为 noLimit, oneYear, oneMonth, oneWeek, oneDay。默认为
+              noLimit
+          label:
+            en_US: freshness
+            ja_JP: freshness
+            pt_BR: freshness
+            zh_Hans: freshness
+          llm_description: 搜索的时间范围，可选值为 noLimit, oneYear, oneMonth, oneWeek, oneDay。默认为
+            noLimit
+          max: null
+          min: null
+          name: freshness
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: 10
+          form: llm
+          human_description:
+            en_US: Number of search results to retrieve (1-10), default is 10
+            ja_JP: 検索結果の数(1-10)、デフォルトは10
+            pt_BR: Número de resultados de pesquisa para recuperar (1-10), padrão
+              é 10
+            zh_Hans: 搜索结果的数量(1-10)，默认为10
+          label:
+            en_US: count
+            ja_JP: count
+            pt_BR: count
+            zh_Hans: count
+          llm_description: 搜索结果的数量(1-10)，默认为10
+          max: 10
+          min: 1
+          name: count
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: number
+        params:
+          count: ''
+          freshness: ''
+          query: ''
+        provider_id: seekerliu/bocha/bocha
+        provider_name: seekerliu/bocha/bocha
+        provider_type: builtin
+        selected: false
+        title: Bocha Web Search
+        tool_configurations: {}
+        tool_label: Bocha Web Search
+        tool_name: BochaWebSearch
+        tool_parameters:
+          count:
+            type: constant
+            value: 10
+          freshness:
+            type: mixed
+            value: noLimit
+          query:
+            type: mixed
+            value: '{{#sys.query#}}'
+        type: tool
+      height: 89
+      id: '1739074828523'
+      position:
+        x: 334
+        y: 263
+      positionAbsolute:
+        x: 334
+        y: 263
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "\ndef main(response: object) -> dict:\n    try:\n        contexts =\
+          \ response[0][\"webpage\"]\n        max_context = min(len(contexts), 10)\n\
+          \        format_contexts = []\n        for i in range(max_context):\n  \
+          \          formatted_context = f\"[[引用:{i + 1}]]\\n网页标题:{contexts[i]['name']}\\\
+          n网页链接:{contexts[i]['url']}\\n网页内容:{contexts[i]['summary']}\\发布时间:{contexts[i]['datePublished']}\\\
+          n网站名称:{contexts[i]['name']}\"\n            format_contexts.append(formatted_context)\n\
+          \n            context = \"\\n\\n\".join(format_contexts)\n        return\
+          \ {\n            \"context\": context\n        }\n    except:\n        return\
+          \ {\n             \"context\": \"暂无搜索结果\"\n        }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          context:
+            children: null
+            type: string
+        selected: false
+        title: Result to Context
+        type: code
+        variables:
+        - value_selector:
+          - '1739074828523'
+          - json
+          variable: response
+      height: 53
+      id: '1739074903618'
+      position:
+        x: 638
+        y: 263
+      positionAbsolute:
+        x: 638
+        y: 263
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    viewport:
+      x: -225.123378631577
+      y: 45.870494319719796
+      zoom: 0.6339667508156958
