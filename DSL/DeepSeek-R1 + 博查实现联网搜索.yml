@@ -1,4 +1,4 @@
- app:
+app:
   description: 使用DeepSeek-R1+博查搜索插件，1分钟搭建一个AI搜索助手，然后自动在多个DeepSeek供应商中切换，从而永不掉线
   icon: ▶️
   icon_background: '#D5D9EB'
